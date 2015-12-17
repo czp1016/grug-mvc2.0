@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>thanks</title>
+		<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+	</head>
+	<body>
+		<h1>
+		大家好，我是瓜哥！
+		</h1>
+		<p>姓名：<?=$name?></p>
+		<p>微博：<a href="<?=$weibo?>">默然仰望星空</a></p>
+		<p>博客：<a href="<?=$blog?>">瓜哥的博客</a></p>
+		<p>url参数：<?=$param?></a></p>
+		<div>
+		<table id="tab_filmlist" class="table table-bordered table-striped" width="100%" border="0">
+          <tr>
+            <th width="25%">姓名</th>
+            <th width="25%">电话</th>
+            <th width="25%">注册时间</th>
+            <th width="25%">操作</th>
+          </tr>
+          <?php foreach($list as $item): ?>
+          <tr>
+	        <td><?=$item['name']?></td>
+	        <td><?=$item['mobile']?></td>
+	        <td><?=$item['regtime']?></td>
+	        <td><button type="button" class="btn btn-xs btn-danger delete" uid="<?=$item['id']?>">删除</button></td>
+	      </tr>
+	  	  <?php endforeach;?>
+        </table>
+        </div>
+		
+		<form class="form-inline bs-docs-example" method="get" action="/test/add">
+			<label>姓名：</label>
+			<input type="text" class="input-small" name="name">
+			<label>电话：</label>
+			<input type="text" class="input-small" name="mobile">  
+			<button id="add" type="submit">添加</button>
+		</form>
+		<script src="/public/js/jquery-1.11.3.min.js"></script>
+		<script src="/public/js/bootstrap.min.js"></script>
+		<script language="JavaScript">
+			$(function(){
+				$(".delete").click(function(){
+				    var uid = $(this).attr('uid');
+				    deleteUid(uid);
+				});
+				function deleteUid(uid){
+					$.post(
+				      '/test/ajaxDelete',
+				      {
+				        uid:uid
+				      },
+				      function(databack){
+				      //alert(databack.err);
+				      var databack=eval("("+databack+")");
+				      if(databack.err == 0){
+				        alert('删除成功！');
+				        location.reload(true);
+				        return;
+				      }
+				      if(databack.err == 1){
+				        alert('删除失败！');
+				        location.reload(true);
+				        return;
+				      }
+				    });
+				}
+			});
+		</script>
+	</body>
+</html>
