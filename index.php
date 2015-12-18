@@ -2,11 +2,15 @@
 /*
 App/Controllers里面放控制器，文件命名格式：ControllernameController.php，类命名格式：ControllernameController。
 业务复杂的话，可以分模块，比如增加Movie模块：App/Controllers下创建目录Movie，其下文件文件命名格式：ControllernameController.php，类命名格式：Movie_ControllernameController。
+
 App/Models里面放数据模型，命名格式：ModelnameModel.php，类命名格式：ModelnameModel
 业务复杂的话，可以分模块，比如增加Movie模块：App/Models下创建目录Movie，其下文件文件命名格式：ModelnameModel.php，类命名格式：Movie_ModelnameModel。
+
 App/Views里面放模板视图，一个文件夹对应一个controller的视图，文件夹下的视图文件以控制器的方法命名，例如test文件夹对应TestController的视图，
 test文件夹下的index.phtml对应TestController的index方法，链接访问方式：http://yourhost/test/index
 业务复杂的话，可以分模块，比如增加Movie模块：.....，链接访问方式：http://yourhost/movie/test/index
+
+App/Cli里面放命令行执行脚本，比如开发Contab等任务脚本, 这时候只需要能自动加载所需要的Model或者类库即可。
 
 关于url：
 链接访问形式:http://yourhost/mvc/index.php/test/thanks?p1=a&p2=b
@@ -32,6 +36,7 @@ test文件夹下的index.phtml对应TestController的index方法，链接访问�
     }
 
 公共底层可以放在Library里，文件命名与类名相同，但是请注意不要与Grug里文件名重复，以避免autoload时出错。
+
 
 */
 

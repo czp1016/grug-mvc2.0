@@ -43,4 +43,9 @@ class Application {
         }
         $obj->$method();
     }
+
+    //命令行支持
+    public function execute($func, $params) {
+        return call_user_func_array($func, $params);
+    }
 }

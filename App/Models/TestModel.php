@@ -9,6 +9,7 @@ class TestModel extends Db{
         parent::__construct(self::DB_CONF, self::TAB_NAME, self::CON_TYPE);
     }
     public function getInfo() {
+        echo "haclass\n";
         return '瓜哥';
     }
 
