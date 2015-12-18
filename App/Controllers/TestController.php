@@ -3,14 +3,13 @@
 class TestController extends Controller {
 	private $test_model;
 	public function init() {
-		$this->test_model = new Movie_TestModel();
+		$this->test_model = new TestModel();
 	}
 	public function index() {
 		$test = $this->test_model->getData();
 		//var_dump(phpinfo());
 		$test = 'nihao';
 		$haha = 'hahahaha';
-		var_dump($_SERVER['REQUEST_URI']);
 		$this->assign(array(
 			'test' => $test,
 			'haha' => $haha

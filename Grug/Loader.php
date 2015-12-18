@@ -18,7 +18,4 @@ class Loader {
 		}
 	}
 
-	static function autoloadFrame($classname) {
-		require_once BASEDIR."/".str_replace("\\", "/", $classname).".php";
-	}
 }
