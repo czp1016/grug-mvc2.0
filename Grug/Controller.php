@@ -1,10 +1,12 @@
 <?php
 
 class Controller {
-    protected $data;
-    protected $controller_name;
-    protected $view_name;
-    protected $view_dir;
+    private $data;
+    private $controller_name;
+    private $view_name;
+    private $view_dir;
+    private $path;
+
 
     public function __construct($controller_name, $view_name) {
         $controller_name = str_replace("_", "/", $controller_name);
@@ -39,9 +41,12 @@ class Controller {
         if (empty($file)) {
             $file = strtolower($this->controller_name).'/'.$this->view_name.'.phtml';
         }
-        $path = $this->view_dir.'/'.$file;
+        $this->path = $this->view_dir.'/'.$file;
+        unset($file); //销毁其他变量，以保证当前符号表中的变量都来自extract($this->data);
         extract($this->data);
-        include $path;
+        // var_dump(get_defined_vars());
+        include $this->path;
+        // require_once $path;
     }
 
     /**
