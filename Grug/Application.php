@@ -17,26 +17,28 @@ class Application {
     }
 
     public function dispatch() {
-        $uri = $_SERVER['REQUEST_URI']; //获取URL链接
+        $uri = $_SERVER['REQUEST_URI']; //获取URI
+        // var_dump($uri);
         $uri_arr = explode('/', trim($uri, '/'));
-        $method_param = array_pop($uri_arr);
+        $method_param = array_pop($uri_arr); //取出method和参数
         $method = array_shift(explode('?', $method_param));
-        $controller = array_pop($uri_arr);
-        $controller_low = strtolower($controller);
-        $controller = ucwords($controller_low);
-        if (empty($uri_arr)) {
-            $module = '';
-        } else {
+        if (!$method) {
+            $controller = $method = 'index';
+        } elseif (!$controller = array_pop($uri_arr)) { //取出controller
+            $controller = 'index';    
+        } else{
             $module = array_pop($uri_arr);
-            if (strstr($module, ".")) {
-                $module = '';
-            } else {
-                $module_low = strtolower($module);
-                $module = ucwords($module_low);
-                $module .= "_";
-            }
+        }
+        $method = strtolower($method); //method取小写，因此controller里的method命名都必须为小写
+        $controller = ucwords(strtolower($controller)); //controller首字母大写，其余小写
+        if ($module) {
+            $module = ucwords(strtolower($module)); //module首字母大写，其余小写
+            $module .= "_";
+        } else {
+            $module = '';
         }
         $class = $module.$controller.'Controller';
+        var_dump($class);
         $obj = new $class($module.$controller, $method);
         if (method_exists($obj,'init')) {
             $obj->init();
