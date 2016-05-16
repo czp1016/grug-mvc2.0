@@ -46,7 +46,8 @@ ini_set('display_errors', 'On');
 error_reporting(1);
 define("BASEDIR", __DIR__);
 include BASEDIR."/Grug/Loader.php";
-spl_autoload_register("\\Grug\\Loader::autoload");
-Application::getInstance(BASEDIR)->dispatch();
+spl_autoload_register("\\Grug\\Grug_Loader::autoload");
+Grug_Bootstrap::getInstance(BASEDIR)->init();
+Grug_Dispatch::getInstance(BASEDIR)->dispatch();
 
 ?>

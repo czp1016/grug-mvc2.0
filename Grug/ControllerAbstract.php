@@ -1,6 +1,6 @@
 <?php
 
-class Controller {
+abstract class Grug_ControllerAbstract {
     private $data;
     private $controller_name;
     private $view_name;
@@ -12,7 +12,7 @@ class Controller {
         $controller_name = str_replace("_", "/", $controller_name);
         $this->controller_name = $controller_name;
         $this->view_name = $view_name;
-        $this->view_dir = Application::getInstance()->base_dir.'/App/Views';
+        $this->view_dir = Grug_Dispatch::getInstance()->base_dir.'/App/Views';
     }
 
     /**

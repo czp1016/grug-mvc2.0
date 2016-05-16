@@ -1,6 +1,6 @@
 <?php
 
-class TestController extends Controller {
+class TestController extends Grug_ControllerAbstract {
 	private $test_model;
 	public function init() {
 		$this->test_model = new TestModel();
@@ -8,8 +8,8 @@ class TestController extends Controller {
 	public function index() {
 		$test = $this->test_model->getData();
 		//var_dump(phpinfo());
-		$test = 'nihao';
-		$haha = 'hahahaha';
+		var_dump($test);
+		exit();
 		$this->assign(array(
 			'test' => $test,
 			'haha' => $haha

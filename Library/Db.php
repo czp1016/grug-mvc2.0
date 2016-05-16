@@ -19,9 +19,7 @@ class Db {
 	public function __construct($connect_info, $table, $connect_type = 'IMysql') {
 		$class = $connect_type;
 		$this->obj_db = new $class();
-		//导入配置文件
-        $db_conf = parse_ini_file("/var/www/html/mvc/Conf/db.conf", true); //此配置文件最好不要和代码放在一起，可放在服务器其他位置
-		$info = $db_conf[$connect_info];
+		$info = Grug_Registry::get($connect_info);
 		$this->obj_db->connect($info['host'], $info['user'], $info['passwd'], $info['dbname']);
 		$this->table = $table;
 	}

@@ -7,8 +7,8 @@ define("BASEDIR", realpath(dirname(__FILE__) . "/../../")); //定位到框架根
 include BASEDIR."/Grug/Loader.php";
 spl_autoload_register("\\Grug\\Loader::autoload");
 // var_dump($argv);
-// Application::getInstance(BASEDIR)->execute("test", $argv);
-Application::getInstance(BASEDIR)->execute(array('testclass', 'test'), $argv);
+Grug_Bootstrap::getInstance($base_dir)->init();
+Grug_Cli::getInstance(BASEDIR)->execute(array('testclass', 'test'), $argv);
 
 function test() {
 	$obj = new TestModel();

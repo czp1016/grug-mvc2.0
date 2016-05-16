@@ -1,20 +1,19 @@
 <?php
 namespace Grug;
 
-class Loader {
-	static $Grug = array('Application','Controller');
-
+class Grug_Loader {
 	static function autoload($classname) {
-		if (in_array($classname, self::$Grug)) {
-			require_once BASEDIR."/Grug/".$classname.".php";
-		} elseif (preg_match('#Model$#', $classname)) {
-			$classname = str_replace("_", "/", $classname);
-			require_once BASEDIR."/App/Models/".$classname.".php";
+		if (preg_match('#Model$#', $classname)) {
+			$classname = str_replace('_', '/', $classname);
+			require_once BASEDIR.'/App/Models/'.$classname.'.php';
 		} elseif (preg_match('#Controller$#', $classname)) {
-			$classname = str_replace("_", "/", $classname);
-			require_once BASEDIR."/App/Controllers/".$classname.".php";
+			$classname = str_replace('_', '/', $classname);
+			require_once BASEDIR.'/App/Controllers/'.$classname.'.php';
+		} elseif (preg_match('#^Grug_#', $classname)) {
+			$classname = str_replace('_', '/', $classname);
+			require_once BASEDIR.'/'.$classname.'.php';
 		} else {
-			require_once BASEDIR."/Library/".$classname.".php";
+			require_once BASEDIR.'/Library/'.$classname.'.php';
 		}
 	}
 

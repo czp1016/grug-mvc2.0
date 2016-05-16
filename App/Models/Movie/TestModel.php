@@ -2,7 +2,7 @@
 
 class Movie_TestModel extends Db{
     const TAB_NAME = "user";
-    const DB_CONF  = "db_1_conf";
+    const DB_CONF  = "db_grug_conf";
     const CON_TYPE  = "IMysql";
     public function __construct() {
 

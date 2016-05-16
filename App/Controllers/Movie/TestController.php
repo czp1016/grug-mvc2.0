@@ -1,6 +1,6 @@
 <?php
 
-class Movie_TestController extends Controller {
+class Movie_TestController extends Grug_ControllerAbstract {
 	private $test_model;
 	public function init() {
 		$this->test_model = new Movie_TestModel();
