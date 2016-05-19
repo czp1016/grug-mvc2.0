@@ -2,15 +2,15 @@
 
 class IMysqli {
 	protected $conn;
-	function connect($host, $user, $passwd, $dbname) {
-		$conn = mysqli_connect($host, $user, $passwd, $dbname);
+	public function connect($host, $port, $user, $passwd, $dbname) {
+		$conn = mysqli_connect($host, $user, $passwd, $dbname, $port);
 		$this->conn = $conn;
 	}
-	function query($sql) {
+	public function query($sql) {
 		$res = mysqli_query($this->conn, $sql);
 		return $res;
 	}
-	function queryAndFetchAssoc($sql) {
+	public function queryAndFetchAssoc($sql) {
 		$res = $this->query($sql);
  		while($row = mysqli_fetch_assoc($res)){
  			$list[] = $row;
@@ -20,7 +20,7 @@ class IMysqli {
 	public function getLastInsertId() {
 		return  mysqli_insert_id($this->conn);
 	}
-	function close() {
+	public function close() {
 		mysqli_close($this->conn);
 	}
 }

@@ -16,11 +16,11 @@ class Db {
 			'double',
 			'decimal'
 	);
-	public function __construct($connect_info, $table, $connect_type = 'IMysql') {
+	public function __construct($connect_info, $table, $connect_type = 'IPdo') {
 		$class = $connect_type;
 		$this->obj_db = new $class();
 		$info = Grug_Registry::get($connect_info);
-		$this->obj_db->connect($info['host'], $info['user'], $info['passwd'], $info['dbname']);
+		$this->obj_db->connect($info['host'], $info['port'], $info['user'], $info['passwd'], $info['dbname']);
 		$this->table = $table;
 	}
 		

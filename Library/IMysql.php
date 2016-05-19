@@ -2,16 +2,19 @@
 
 class IMysql {
 	protected $conn;
-	function connect($host, $user, $passwd, $dbname) {
+
+	public function connect($host, $port, $user, $passwd, $dbname) {
+		if ($port) {
+			$host = $host.":".$port;
+		}
 		$conn = mysql_connect($host, $user, $passwd);
 		mysql_select_db($dbname, $conn);
 		$this->conn = $conn;
 	}
-	function query($sql) {
-		$res = mysql_query($sql, $this->conn);
- 		return $res;
+	public function query($sql) {
+ 		return mysql_query($sql, $this->conn);
 	}
-	function queryAndFetchAssoc($sql) {
+	public function queryAndFetchAssoc($sql) {
 		$res = $this->query($sql);
  		while($row = mysql_fetch_assoc($res)){
  			$list[] = $row;
@@ -21,7 +24,7 @@ class IMysql {
 	public function getLastInsertId() {
 		return  mysql_insert_id();
 	}
-	function close() {
+	public function close() {
 		mysql_close($this->conn);
 	}
 }

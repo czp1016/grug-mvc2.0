@@ -29,16 +29,19 @@ class Grug_Dispatch {
             $controller = $method;
             $method = 'index';    
         } else{
-            $module = array_pop($uri_arr);
+            if (!empty($uri_arr)) {
+                foreach ($uri_arr as &$value) {
+                    $value = ucwords(strtolower($value));
+                }
+                unset($value);
+                $module = implode('_', $uri_arr);
+                $module .= '_';
+            } else {
+                $module = '';
+            }
         }
         $method = strtolower($method); //method取小写，因此controller里的method命名都必须为小写
         $controller = ucwords(strtolower($controller)); //controller首字母大写，其余小写
-        if ($module) {
-            $module = ucwords(strtolower($module)); //module首字母大写，其余小写
-            $module .= "_";
-        } else {
-            $module = '';
-        }
         $class = $module.$controller.'Controller';
         $this->_afterRoute($module, $controller, $method);
         // var_dump($class, $method);
